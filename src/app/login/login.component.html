@@ -1,0 +1,41 @@
+<div class="page-container">
+  <div class="page-content">
+    <div class="content-wrapper">
+      <div class="content">
+        <form role="form" (submit)="login()">
+          <div class="panel panel-body login-form" id="panelInicio">
+            <div class="text-center" id="pLogo">
+              <div><img src="assets/images/logo_eltorneo.png" alt="Logo"></div>
+              <h4 class="content-group">Iniciar sesión<small class="display-block"></small></h4>
+            </div>
+            <div class="form-group has-feedback has-feedback-left">
+              <input type="text" class="form-control text-input" placeholder="Usuario" id="username" name="username"
+                [(ngModel)]="credentials.username" autocomplete="off">
+              <div class="form-control-feedback">
+                <i class="icon-user text-muted"> <img src="assets/images/usuario.png" width="16" height="16"
+                    alt="password" id="loginIcon" /> </i>
+              </div>
+            </div>
+            <div class="form-group has-feedback has-feedback-left">
+              <input type="password" class="form-control text-input" placeholder="Contraseña" id="password"
+                name="password" [(ngModel)]="credentials.password" autocomplete="off">
+              <div class="form-control-feedback">
+                <i class="icon-lock2 text-muted"> <img src="assets/images/password.png" width="16" height="16"
+                    alt="password" id="loginIcon" />
+                </i>
+              </div>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-block">Ingresar <i
+                  class="icon-circle-right2 position-right"></i></button>
+            </div>
+
+            <div class="alert alert-danger" [hidden]="!error">
+              Ha ocurrido un error, por favor vuelva a intentar.
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
