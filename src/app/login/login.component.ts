@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.app.authenticate(this.credentials, () => {
-      this.router.navigateByUrl('/');
+      console.log(this.credentials);
     });
     return false;
   }
