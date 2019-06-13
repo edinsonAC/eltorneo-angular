@@ -10,21 +10,18 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/directivas">Directivas </a>
+            <li class="nav-item" *ngIf="authService.obtenerTipoUsuario() == 'administrador'" routerLinkActive="active">
+                <a class="nav-link" routerLink="/listTorneo">Torneos </a>
             </li>
 
-            <li class="nav-item" routerLinkActive="active">
+            <li class="nav-item" [ngClass]="{'hidden': !authService.isLoggedIn() }" routerLinkActive="active">
                 <a class="nav-link" routerLink="/usuarios">Usuarios </a>
             </li>
-            <li class="nav-item" routerLinkActive="active">
+            <li class="nav-item" [ngClass]="{'hidden': !authService.isLoggedIn() }" routerLinkActive="active">
                 <a class="nav-link" routerLink="/clientes">Clientes </a>
             </li>
-            <li class="nav-item" routerLinkActive="active">
+            <li class="nav-item" [ngClass]="{'hidden': authService.isLoggedIn() }" routerLinkActive="active">
                 <a class="nav-link" routerLink="/login">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" (click)="logout()">Logout</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -42,9 +39,8 @@
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <a routerLink="" class="text-white" [ngClass]="{'hidden': !authService.isLoggedIn() }" (click)="logout()">
+            <span class="ml-1">Log out</span>
+        </a>
     </div>
 </nav>

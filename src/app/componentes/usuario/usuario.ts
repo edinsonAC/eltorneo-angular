@@ -1,6 +1,6 @@
 export class Usuario {
     usuaId: string;
-    usuaClave: string;
+    password: string;
     usuaCorreo: string;
     usuaEstado: string;
     usuaFecharegistro: string;
