@@ -1,19 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { Torneo } from '../torneo/torneo';
-import { TorneoService } from '../torneo/torneo.service';
+import { Equipo } from '../equipo';
+import { EquipoService } from '../equipo.service';
+import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-list-torneo',
-  templateUrl: './list-torneo.component.html',
-  styleUrls: ['./list-torneo.component.css']
+  selector: 'app-list-equipo',
+  templateUrl: './list-equipo.component.html',
+  styleUrls: ['./list-equipo.component.css']
 })
-export class ListTorneoComponent implements OnInit {
-  torneos: Torneo[];
-  dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<Torneo> = new Subject();
+export class ListEquipoComponent implements OnInit {
 
-  constructor(private torneoService: TorneoService) { }
+  equipos: Equipo[];
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<Equipo> = new Subject();
+
+
+  constructor(
+    private equipoService: EquipoService
+  ) { }
 
   ngOnInit() {
 
@@ -40,15 +45,13 @@ export class ListTorneoComponent implements OnInit {
       },
     };
 
-
-    this.torneoService.listarTorneos().subscribe(
+    this.equipoService.listarEquipos().subscribe(
       (response) => {
-        this.torneos = response
+        this.equipos = response
         this.dtTrigger.next();
       }
     );
   }
-
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();

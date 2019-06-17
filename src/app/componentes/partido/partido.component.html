@@ -1,0 +1,31 @@
+<div class="card">
+  <div class="card-header">Equipos</div>
+  <div class="card-body text-primary">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="" class="col-form-label">Equipo local</label>
+          <input type="text" name="nombre" class="form-control" disabled [(ngModel)]="partido.equipo1.equiNombre">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="" class="col-form-label">Equipo visitante</label>
+          <input type="text" name="nombre" class="form-control" disabled [(ngModel)]="partido.equipo2.equiNombre">
+        </div>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label for="arbitro">Arbitros</label>
+        <select name="arbitro" id="arbitro" class="form-control">
+          <option *ngFor="let arbitro of arbitros" >{{arbitro.arbiNombre}} {{arbitro.arbiApellido}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+
+    </div>
+  </div>
+</div>

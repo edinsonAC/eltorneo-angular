@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Torneo } from './torneo';
 import { TorneoService } from './torneo.service';
 import { Router, ActivatedRoute } from '@angular/router';
+
 import swal from 'sweetalert2'
 
 @Component({
@@ -45,8 +46,18 @@ export class TorneoComponent implements OnInit {
     )
   }
 
-  public actualizarTorneo():void {
+  public actualizarTorneo(): void {
     this.torneoService.actualizarTorneo(this.torneo)
+      .subscribe(
+        respuesta => {
+          this.router.navigate(['/listTorneo'])
+          swal.fire('Torneo actualizado', `Torneo ${this.torneo.tornNombre} creado con éxito`, 'success')
+        }
+      )
+  }
+
+  public realizarSorteo(): void {
+    this.torneoService.realizarSorteo(this.torneo.tornId)
       .subscribe(
         respuesta => {
           this.router.navigate(['/listTorneo'])

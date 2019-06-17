@@ -10,7 +10,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item" *ngIf="authService.obtenerTipoUsuario() == 'administrador'" routerLinkActive="active">
+            <li class="nav-item" *ngIf="authService.getTipo() == '1'" routerLinkActive="active">
                 <a class="nav-link" routerLink="/listTorneo">Torneos </a>
             </li>
 
@@ -18,7 +18,7 @@
                 <a class="nav-link" routerLink="/usuarios">Usuarios </a>
             </li>
             <li class="nav-item" [ngClass]="{'hidden': !authService.isLoggedIn() }" routerLinkActive="active">
-                <a class="nav-link" routerLink="/clientes">Clientes </a>
+                <a class="nav-link" routerLink="/listEquipo">equipo </a>
             </li>
             <li class="nav-item" [ngClass]="{'hidden': authService.isLoggedIn() }" routerLinkActive="active">
                 <a class="nav-link" routerLink="/login">Login</a>

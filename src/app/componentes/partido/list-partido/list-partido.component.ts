@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { Torneo } from '../torneo/torneo';
-import { TorneoService } from '../torneo/torneo.service';
+import { Partido } from '../partido';
+import { PartidoService } from '../partido.service';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-list-torneo',
-  templateUrl: './list-torneo.component.html',
-  styleUrls: ['./list-torneo.component.css']
+  selector: 'app-list-partido',
+  templateUrl: './list-partido.component.html',
+  styleUrls: ['./list-partido.component.css']
 })
-export class ListTorneoComponent implements OnInit {
-  torneos: Torneo[];
-  dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<Torneo> = new Subject();
+export class ListPartidoComponent implements OnInit {
 
-  constructor(private torneoService: TorneoService) { }
+  dtOptions: DataTables.Settings = {};
+  partidos: Partido[];
+  dtTrigger: Subject<Partido> = new Subject();
+
+  constructor(private partidoService: PartidoService) { }
 
   ngOnInit() {
-
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
@@ -40,18 +40,20 @@ export class ListTorneoComponent implements OnInit {
       },
     };
 
+    this.partidoService.listarPartidos().
+      subscribe(
+        response => {
+          this.partidos = response
+          // Calling the DT trigger to manually render the table
+          this.dtTrigger.next();
+        });
 
-    this.torneoService.listarTorneos().subscribe(
-      (response) => {
-        this.torneos = response
-        this.dtTrigger.next();
-      }
-    );
   }
 
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
   }
+
 
 }

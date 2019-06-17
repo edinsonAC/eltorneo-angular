@@ -20,6 +20,18 @@ import { AuthService } from './auth/services/auth.service';
 import { TorneoComponent } from './componentes/torneo/torneo.component';
 import { ListTorneoComponent } from './componentes/list-torneo/list-torneo.component';
 import { TorneoService } from './componentes/torneo/torneo.service';
+import { JugadorComponent } from './componentes/jugador/jugador.component';
+import { EquipoComponent } from './componentes/equipo/equipo.component';
+import { ListEquipoComponent } from './componentes/equipo/list-equipo/list-equipo.component';
+import { EquipoService } from './componentes/equipo/equipo.service';
+import { ListJugadorComponent } from './componentes/jugador/list-jugador/list-jugador.component';
+import { JugadorService } from './componentes/jugador/jugador.service';
+import { PartidoComponent } from './componentes/partido/partido.component';
+import { ListPartidoComponent } from './componentes/partido/list-partido/list-partido.component';
+import { PartidoService } from './componentes/partido/partido.service';
+import { DataTablesModule } from 'angular-datatables';
+import { ArbitroComponent } from './componentes/arbitro/arbitro.component';
+import { ArbitroService } from './componentes/arbitro/arbitro.service';
 
 const routes: Routes = [
   { path: '', component: DirectivaComponent, canActivate: [AuthGuard] },
@@ -30,6 +42,15 @@ const routes: Routes = [
   { path: 'listTorneo', component: ListTorneoComponent },
   { path: 'torneo/:id', component: TorneoComponent },
   { path: 'torneo', component: TorneoComponent },
+  { path: 'listEquipo', component: ListEquipoComponent },
+  { path: 'equipo', component: EquipoComponent },
+  { path: 'equipo/:id', component: EquipoComponent },
+  { path: 'torneo', component: EquipoComponent },
+  { path: 'listJugadores/:id', component: ListJugadorComponent },
+  { path: 'jugador', component: JugadorComponent },
+  { path: 'jugador/:id', component: JugadorComponent },
+  { path: 'listPartido', component: ListPartidoComponent },
+  { path: 'partido/:id', component: PartidoComponent },
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
 ];
@@ -56,20 +77,33 @@ export class XhrInterceptor implements HttpInterceptor {
     UsuarioComponent,
     HomeComponent,
     TorneoComponent,
-    ListTorneoComponent
+    ListTorneoComponent,
+    JugadorComponent,
+    EquipoComponent,
+    ListEquipoComponent,
+    ListJugadorComponent,
+    PartidoComponent,
+    ListPartidoComponent,
+    ArbitroComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DataTablesModule
   ],
   providers: [ClienteService,
     UsuarioService,
     AuthenticationService,
     AuthService,
     TorneoService,
+    EquipoService,
+    AppComponent,
+    JugadorService,
+    PartidoService,
+    ArbitroService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
 
   ],

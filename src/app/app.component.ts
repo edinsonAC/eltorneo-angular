@@ -14,7 +14,7 @@ export class AppComponent {
   currentUser: any;
   title = 'probando angular';
   curso: string = "Angular y spring";
-  profesor: string = "Cracktolinez";
+  public idTipoUsuario: string = "";
 
   constructor(private app: AppserviceService,
     private http: HttpClient,
