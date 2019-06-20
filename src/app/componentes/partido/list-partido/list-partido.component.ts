@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Partido } from '../partido';
 import { PartidoService } from '../partido.service';
 import { Subject } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list-partido',
@@ -9,12 +10,15 @@ import { Subject } from 'rxjs';
   styleUrls: ['./list-partido.component.css']
 })
 export class ListPartidoComponent implements OnInit {
-
+  idTorneo: string;
   dtOptions: DataTables.Settings = {};
   partidos: Partido[];
   dtTrigger: Subject<Partido> = new Subject();
 
-  constructor(private partidoService: PartidoService) { }
+  constructor(
+    private partidoService: PartidoService,
+    private activateRoute: ActivatedRoute
+  ) { }
 
   ngOnInit() {
     this.dtOptions = {
@@ -40,15 +44,20 @@ export class ListPartidoComponent implements OnInit {
       },
     };
 
-    this.partidoService.listarPartidos().
-      subscribe(
-        response => {
-          this.partidos = response
-          // Calling the DT trigger to manually render the table
-          this.dtTrigger.next();
-        });
-
+    this.activateRoute.params.subscribe(params => {
+      this.idTorneo = params['id']
+      if (this.idTorneo) {
+        this.partidoService.listarPartidos(this.idTorneo).
+          subscribe(
+            response => {
+              this.partidos = response
+              this.dtTrigger.next();
+            });
+      }
+    }
+    )
   }
+
 
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event

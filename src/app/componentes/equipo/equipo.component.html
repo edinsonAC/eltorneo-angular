@@ -1,19 +1,27 @@
+<div class="row back">
+  <button type="button" class="btn btn-light" [routerLink]="['/listEquipo']">Volver</button>
+</div>
 <div class="card">
-  <div class="card-header">Equipos</div>
+  <div class="card-header"><h3>Equipos</h3></div>
   <div class="card-body text-primary">
-    <form>
+    <form #formEquipo="ngForm">
       <div class="form-group row">
         <label for="" class="col-form-label col-2">Nombre</label>
         <div class="col-sm-6 ">
-          <input type="text" name="nombre" class="form-control" [(ngModel)]="equipo.equiNombre">
+          <input type="text" name="nombre" class="form-control" [(ngModel)]="equipo.equiNombre" required #nombre="ngModel">
+          <span *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+            <label class="label is-invalid" *ngIf="nombre.errors.required">
+              Nombre es requerido
+            </label>
+          </span>
         </div>
       </div>
       <div class="form-group row">
         <div class="col-sm-6">
           <button type="button" class="btn btn-primary" (click)='crearEquipo()'
-            *ngIf="!equipo.equiId else elseBlock">Registrar</button>
+            *ngIf="!equipo.equiId else elseBlock" [disabled]="!formEquipo.form.valid"><b>Registrar</b></button>
           <ng-template #elseBlock>
-            <button type="button" class="btn btn-primary" (click)='actualizarEquipo()'>Actualizar</button>
+            <button type="button" class="btn btn-primary" (click)='actualizarEquipo()' [disabled]="!formEquipo.form.valid">Actualizar</button>
             </ng-template>
 
         </div>

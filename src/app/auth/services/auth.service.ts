@@ -6,7 +6,9 @@ import { Usuario } from 'src/app/componentes/usuario/usuario';
 import { environment } from 'src/environments/environment';
 import { AppComponent } from 'src/app/app.component';
 import * as jwt_decode from "jwt-decode";
-
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs'
 @Injectable({
   providedIn: 'root'
 })
@@ -28,7 +30,8 @@ export class AuthService {
         this.saveToken(res.headers.get('Authorization'));
         this.obtenerTipoUsuario();
         this.router.navigate([this.redirectToUrl]);
-      });
+      }      
+      )
   }
 
   private saveToken(token: string) {
@@ -42,7 +45,8 @@ export class AuthService {
 
   public logout(): void {
     localStorage.removeItem(AuthService.TOKEN_STORAGE_KEY);
-    this.router.navigate(['/login']);
+    // this.router.navigate(['/login']);
+    location.reload();
   }
 
   public isLoggedIn(): boolean {
@@ -50,10 +54,16 @@ export class AuthService {
   }
 
   public obtenerTipoUsuario(): String {
-    let tokenInfo = jwt_decode(this.getToken()); // decode token
-    let expireDate = tokenInfo.exp; // get token expiration dateTime
-    let tipoUsuario = tokenInfo.authorities[0];
-    this.guardarTipoDeUsuarioGlobal(tipoUsuario);
+    let tipoUsuario: string;
+    if (this.getToken() != null) {
+      let tokenInfo = jwt_decode(this.getToken()); // decode token
+      let expireDate = tokenInfo.exp; // get token expiration dateTime
+      let tipoUsuario = tokenInfo.authorities[0];
+      this.guardarTipoDeUsuarioGlobal(tipoUsuario);
+    } else {
+      tipoUsuario = "";
+    }
+
     return tipoUsuario;
   }
 

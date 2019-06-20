@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Usuario } from 'src/app/componentes/usuario/usuario';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 
 
@@ -19,9 +21,14 @@ export class TokenService {
 
   constructor(private http: HttpClient) { }
 
-  public getResponseHeaders(credentials: Usuario) {
+  public getResponseHeaders(credentials: Usuario): Observable<any> {
     let loginUrl = API_URL + '/login';
-    return this.http.post(loginUrl, credentials, httpOptions);
+    return this.http.post(loginUrl, credentials, httpOptions).pipe(
+      catchError(e => {
+        console.log("error --->>>", e);
+        return throwError(e);
+      })
+    )
   }
 
   public logout() {

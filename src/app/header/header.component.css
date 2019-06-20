@@ -1,3 +1,19 @@
 .hidden {
     display: none;
   }
+
+  .cerrar-sesion{
+    font-weight: bold;
+    color: red;
+    cursor: pointer;
+  }
+
+  .cerrar-sesion:hover{
+    color: white;
+  }
+
+  .cerrar-sesion::before {
+    font-size: 30px !important;
+  }
+
+  

@@ -1,1 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+.font{
+    font-weight: bold;
+}
+
+.is-invalid{
+    color: red;
+}
+
+.back{
+    justify-content: flex-end;
+    margin: 5px;
+}

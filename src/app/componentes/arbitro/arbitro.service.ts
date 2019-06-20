@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { Observable } from 'rxjs';
 import { Arbitro } from './arbitro';
 import { map } from 'rxjs/operators';
+import { ArbitroPartido } from './arbitroPartido';
 
 const API_URL = environment.apiUrl;
 @Injectable({
@@ -39,6 +40,10 @@ export class ArbitroService {
 
   actualizarArbitro(arbitro: Arbitro) {
     return this.http.put<Arbitro>(`${this.urlGetArbitro}/${arbitro.arbiId}`, arbitro, { headers: this.httpHeaders })
+  }
+
+  asignarArbitroPartido(encuentro: ArbitroPartido): Observable<ArbitroPartido> {
+    return this.http.post<ArbitroPartido>(API_URL + "/arbitro/asignarArbitroPartido", encuentro, { headers: this.httpHeaders })
   }
 
 }

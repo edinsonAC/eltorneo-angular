@@ -1,3 +1,6 @@
+<div class="row back">
+  <button type="button" class="btn btn-light"   [routerLink]="['/listEquipo']">Volver</button>
+</div>
 <div class="card border-primary mb-3">
   <div class="card-header">Jugadores</div>
   <div class="card-body text-primary">
@@ -6,17 +9,17 @@
         <h5 class="card-title">Listado de jugadores</h5>
       </div>
       <div class="col-md-6 text-align-end">
-        <button type="button" class="btn btn-primary" [routerLink]="['/jugador']">Crear jugador</button>
+        <button type="button" class="btn btn-primary" [routerLink]="['/jugador']"><b>Crear jugador</b></button>
 
       </div>
     </div>
-    <table class="table table-bordered table-striped" datatable="">
+    <table class="table table-bordered table-striped" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
       <thead>
         <tr>
-          <th>nombre</th>
-          <th>apellido</th>
-          <th>dorsal</th>
-          <th>editar</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Dorsal</th>
+          <th>Acción</th>
         </tr>
       </thead>
       <tbody>
@@ -25,7 +28,7 @@
           <td>{{jugador.jugaApellido}}</td>
           <td>{{jugador.jugaDorsal}}</td>
           <td><button type="button" class="btn btn-primary" name="button"
-              [routerLink]="['/jugador', jugador.jugaId]">editar</button></td>
+              [routerLink]="['/jugador', jugador.jugaId, jugador.equipo.equiId]">editar</button></td>
         </tr>
       </tbody>
     </table>

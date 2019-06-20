@@ -10,7 +10,6 @@ background: none;
 }
 #panelInicio{
 background-color: rgba(255,255,255,0.7);
-border: 3px solid black;
 border-radius: 20px;
 
 }
@@ -22,9 +21,43 @@ margin-right: 6px;
 
 #pLogo{
 margin-bottom: 8px;
-border-bottom: 2px solid black;
 }
 
 #registro{
 background-color: rgba(200,200,200,1);
 }
+
+.centrarLogin{
+    text-align: -webkit-center;
+}
+
+.inner-addon {
+    position: relative;
+  }
+
+  .inner-addon .glyphicon {
+    position: absolute;
+    padding: 10px;
+    pointer-events: none;
+  }
+  .left-addon .glyphicon {
+    left: 0px;
+  }
+  .right-addon .glyphicon {
+    right: 0px;
+  }
+  .left-addon input {
+    padding-left: 30px;
+  }
+  .right-addon input {
+    padding-right: 30px;
+  }
+
+  .size{
+    font-size: 20px;
+  }
+
+  .icon-login{
+    background-color: #007bff;
+    border-radius: 5px 0px 0px 5px
+  }

@@ -7,40 +7,22 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
             <li class="nav-item" *ngIf="authService.getTipo() == '1'" routerLinkActive="active">
                 <a class="nav-link" routerLink="/listTorneo">Torneos </a>
             </li>
-
-            <li class="nav-item" [ngClass]="{'hidden': !authService.isLoggedIn() }" routerLinkActive="active">
+            <li class="nav-item" *ngIf="authService.getTipo() == '1'" routerLinkActive="active">
                 <a class="nav-link" routerLink="/usuarios">Usuarios </a>
             </li>
-            <li class="nav-item" [ngClass]="{'hidden': !authService.isLoggedIn() }" routerLinkActive="active">
-                <a class="nav-link" routerLink="/listEquipo">equipo </a>
+            <li class="nav-item" *ngIf="authService.getTipo() == '1'" routerLinkActive="active">
+                <a class="nav-link" routerLink="/listEquipo">Equipo </a>
             </li>
-            <li class="nav-item" [ngClass]="{'hidden': authService.isLoggedIn() }" routerLinkActive="active">
-                <a class="nav-link" routerLink="/login">Login</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            <li class="nav-item" *ngIf="authService.getTipo() == '1'" routerLinkActive="active">
+                <a class="nav-link" routerLink="/listArbitro">Arbitros </a>
             </li>
         </ul>
-        <a routerLink="" class="text-white" [ngClass]="{'hidden': !authService.isLoggedIn() }" (click)="logout()">
-            <span class="ml-1">Log out</span>
-        </a>
+        <span  class="cerrar-sesion flaticon-login"  *ngIf="authService.isLoggedIn()" (click)="logout()" >
+          
+        </span>
+
     </div>
 </nav>

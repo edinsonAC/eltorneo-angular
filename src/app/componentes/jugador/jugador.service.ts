@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { map } from 'rxjs/operators';
 
-const API_URL_JUGADOR = environment.apiUrl;
+const API_URL_JUGADOR = environment.apiUrl+'/jugador';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class JugadorService {
 
 
   listarJugadoresPorEquipo(idEquipo): Observable<Jugador[]> {
-    return this.http.get(`${API_URL_JUGADOR + '/jugador/listarJugadores'}/${idEquipo}`).pipe(
+    return this.http.get(`${API_URL_JUGADOR + '/listarJugadores'}/${idEquipo}`).pipe(
       map(response => response as Jugador[])
     );
   }

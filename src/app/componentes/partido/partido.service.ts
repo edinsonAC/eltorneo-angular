@@ -20,8 +20,8 @@ export class PartidoService {
   constructor(private http: HttpClient, private auth: AuthService) { }
 
 
-  listarPartidos(): Observable<Partido[]> {
-    return this.http.get(API_URL + '/partido/listarPartidos').pipe(
+  listarPartidos(idTorneo): Observable<Partido[]> {
+    return this.http.get(`${API_URL + '/partido/listarPartidos'}/${idTorneo}`).pipe(
       map(response => response as Partido[])
     );
   }

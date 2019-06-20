@@ -1,40 +1,50 @@
+<div class="row back">
+  <button type="button" class="btn btn-light" [routerLink]="['/listTorneo']">Volver</button>
+</div>
 <div class="card">
   <div class="card-header">Torneos</div>
   <div class="card-body text-primary">
-    <form>
-      <div class="form-group row">
+    <form #torneoForm="ngForm">
+      <div class="row form-group">
         <label for="" class="col-form-label col-2">Nombre</label>
         <div class="col-sm-6 ">
-          <input type="text" name="nombre" class="form-control" [(ngModel)]="torneo.tornNombre">
+          <input type="text" name="nombre" class="form-control " [(ngModel)]="torneo.tornNombre" required #nombre="ngModel">
+          <span *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+            <label class="label is-invalid" *ngIf="nombre.errors.required">
+              Nombre es requerido
+            </label>
+          </span>
         </div>
       </div>
-      <div class="form-group row">
+      <div class="row form-group">
         <label for="" class="col-form-label col-2">Fecha de inicio</label>
         <div class="col-sm-6">
-          <input type="text" name="fecha" class="form-control" [(ngModel)]="torneo.tornFechainicial">
+          <input type="date" name="fecha" class="form-control" [(ngModel)]="torneo.tornFechainicial" required #fecha="ngModel">
+          <span *ngIf="fecha.invalid && (fecha.dirty || fecha.touched)">
+            <label *ngIf="fecha.errors.required" class="label is-invalid">
+              Fecha es requerida
+            </label>
+          </span>
         </div>
       </div>
-      <div class="form-group row">
-        <div class="col-sm-6">
-          <button type="button" class="btn btn-primary" (click)='crearTorneo()'
-            *ngIf="!torneo.tornId else elseBlock">Registrar</button>
-          <ng-template #elseBlock>
-            <div class="row">
-              <div class="col-md-6">
-                <button type="button" class="btn btn-primary" (click)='actualizarTorneo()'>Actualizar</button>
-              </div>
-              <div class="col-md-6">
-                <button type="button" class="btn btn-success" (click)='realizarSorteo()'>Iniciar sorteo</button>
-                <button type="button" class="btn btn-success" name="button"
-              [routerLink]="['/listPartido']">ver partidos</button>
+      <div class="row form-group">
+        <button type="button" class="btn btn-primary" (click)='crearTorneo()'
+          *ngIf="!torneo.tornId else elseBlock" [disabled]="!torneoForm.form.valid">Registrar</button>
 
-              </div>
-            </div>
-          </ng-template>
-
-        </div>
       </div>
+      <ng-template #elseBlock>
 
+        <div class="col-md-6 form-group">
+          <button type="button" class="btn btn-primary" (click)='actualizarTorneo()' [disabled]="!torneoForm.form.valid">Editar</button>
+        </div>
+        <div class="col-md-6 form-group botones-torneo">
+          <button type="button" *ngIf="torneo.tornSorteo != '1' " class="btn btn-success"
+            (click)='realizarSorteo()'>Iniciar
+            sorteo</button>
+          <button type="button" class="btn btn-success" name="button" [routerLink]="['/listPartido', torneo.tornId]">ver
+            partidos</button>
+        </div>
+      </ng-template>
     </form>
   </div>
 </div>

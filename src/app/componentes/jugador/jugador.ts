@@ -1,3 +1,5 @@
+import { Equipo } from '../equipo/equipo';
+
 export class Jugador {
     jugaId: number;
     jugaApellido: String;
@@ -8,4 +10,5 @@ export class Jugador {
     jugaEstado: number;
     jugaNombre: String;
     jugaTelefono: String;
+    equipo: Equipo;
 }
