@@ -1,3 +1,102 @@
-<p>
-  arbitro works!
-</p>
+<div class="row back">
+  <button type="button" class="btn btn-light" [routerLink]="['/listArbitro']">Volver</button>
+</div>
+<div class="card">
+  <div class="card-header">Arbitro</div>
+  <div class="card-body text-primary">
+    <form #formJugador="ngForm">
+      <div class="form-group row">
+        <label for="" class="col-form-label col-2">Nombres</label>
+        <div class="col-sm-6 ">
+          <input type="text" name="nombre" class="form-control" [(ngModel)]="arbitro.arbiNombre" maxlength="30" autocomplete="off" required #nombre="ngModel">
+          <span *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+            <label class="label is-invalid" *ngIf="nombre.errors.required">
+              Nombres es requerido
+            </label>
+          </span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="" class="col-form-label col-2">Apellidos</label>
+        <div class="col-sm-6">
+          <input type="text" name="apellido" class="form-control" [(ngModel)]="arbitro.arbiApellido" maxlength="30" autocomplete="off" required #apellido="ngModel">
+          <span *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
+            <label class="label is-invalid" *ngIf="apellido.errors.required">
+              apellidos es requerido
+            </label>
+          </span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="" class="col-form-label col-2">Documento</label>
+        <div class="col-sm-6">
+          <input type="text" name="fecha" class="form-control" [(ngModel)]="arbitro.arbiDocumento" maxlength="10" autocomplete="off" required #documento="ngModel">
+          <span *ngIf="documento.invalid && (documento.dirty || documento.touched)">
+            <label class="label is-invalid" *ngIf="documento.errors.required">
+              documento es requerido
+            </label>
+          </span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="" class="col-form-label col-2">Direccion</label>
+        <div class="col-sm-6">
+          <input type="text" name="direccion" class="form-control" [(ngModel)]="arbitro.arbiDireccion" maxlength="30" autocomplete="off" required #direccion="ngModel">
+          <span *ngIf="direccion.invalid && (direccion.dirty || direccion.touched)">
+            <label class="label is-invalid" *ngIf="direccion.errors.required">
+              dirección es requerida
+            </label>
+          </span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="" class="col-form-label col-2">Celular</label>
+        <div class="col-sm-6">
+          <input type="number" name="celular" class="form-control" [(ngModel)]="arbitro.arbiCelular" maxlength="10" autocomplete="off" required #celular="ngModel">
+          <span *ngIf="celular.invalid && (celular.dirty || celular.touched)">
+            <label class="label is-invalid" *ngIf="celular.errors.required">
+              celular es requerido
+            </label>
+          </span>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label for="" class="col-form-label col-2">Usuario</label>
+        <div class="col-sm-6">
+          <input type="text" name="usuario" class="form-control" [(ngModel)]="usuarioArbitro.usuaUsuario" maxlength="20" [disabled]="arbitro.arbiId" autocomplete="off" required #usuario="ngModel">
+          <span *ngIf="usuario.invalid && (usuario.dirty || usuario.touched)">
+            <label class="label is-invalid" *ngIf="usuario.errors.required">
+              usuario es requerido
+            </label>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="" class="col-form-label col-2">correo</label>
+        <div class="col-sm-6">
+          <input type="email" name="correo" class="form-control" [(ngModel)]="usuarioArbitro.usuaCorreo" maxlength="30" [disabled]="arbitro.arbiId"  autocomplete="off" required #correo="ngModel">
+          <span *ngIf="correo.invalid && (correo.dirty || correo.touched)">
+            <label class="label is-invalid" *ngIf="usuario.errors.required">
+              correo es requerido
+            </label>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <button type="button" class="btn btn-primary" (click)='crearArbitro()'
+            *ngIf="!arbitro.arbiId else elseBlock">Registrar</button>
+          <ng-template #elseBlock>
+            <button type="button" class="btn btn-primary" (click)='actualizarArbitro()'>Actualizar</button>
+            </ng-template>
+
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

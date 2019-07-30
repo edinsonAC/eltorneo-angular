@@ -4,7 +4,7 @@ import { Torneo } from './torneo';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
-import { Usuario } from '../usuario/usuario';
+import { User } from '../usuario/usuario';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
 const API_URL = environment.apiUrl;

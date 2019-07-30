@@ -4,7 +4,7 @@ import { ArbitroService } from '../arbitro/arbitro.service';
 import { PartidoService } from './partido.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Partido } from './partido';
-import { ArbitroPartido } from '../arbitro/arbitroPartido';
+import { PartidoArbitro } from '../arbitro/arbitroPartido';
 import { Torneo } from '../torneo/torneo';
 import swal from 'sweetalert2'
 import { Equipo } from '../equipo/equipo';
@@ -16,13 +16,17 @@ import { Equipo } from '../equipo/equipo';
 })
 export class PartidoComponent implements OnInit {
   arbitros: Arbitro[];
-  partido: Partido;
-  torneo:Torneo = new Torneo();
-  equipo1:Equipo = new Equipo();
-  equipo2:Equipo = new Equipo();
-  arbitroCentral: number = 0;
-  arbitroAsistente1: number = 0;
-  arbitroAsistente2: number = 0;
+  partido: Partido = new Partido();
+  partidoArbitroCentral: PartidoArbitro = new PartidoArbitro();
+  partidoArbitro1: PartidoArbitro = new PartidoArbitro();
+  partidoArbitro2: PartidoArbitro = new PartidoArbitro();
+  torneo: Torneo = new Torneo();
+  equipo1: Equipo = new Equipo();
+  equipo2: Equipo = new Equipo();
+  arbitroCentral: Arbitro = new Arbitro();
+  arbitroAsistente1: Arbitro = new Arbitro();
+  arbitroAsistente2: Arbitro = new Arbitro();
+
 
   constructor(
     private arbitroService: ArbitroService,
@@ -50,11 +54,41 @@ export class PartidoComponent implements OnInit {
             this.torneo = this.partido.torneo
             this.equipo1 = this.partido.equipo1
             this.equipo2 = this.partido.equipo2
+            this.cargarArbitroCentral(this.partido.partId)
+            this.listarArbitrosAsistentes(this.partido.partId)
             console.log("llega ------>>>>>>>>>>", response)
           }
         )
       }
     })
+  }
+
+  public cargarArbitroCentral(id): void {
+    this.partidoService.buscarArbitroCentralPorPartido(id).subscribe(
+      (response) => {
+        if (response != null) {
+          this.partidoArbitroCentral = response
+          this.arbitroCentral = this.partidoArbitroCentral.arbitro
+          console.log("llega ------>>>>>>>>>>", response)
+        }
+
+      }
+    )
+  }
+
+  public listarArbitrosAsistentes(id): void {
+    this.partidoService.buscarArbitroAsistentesPorPartido(id).
+      subscribe(
+        response => {
+          console.log("respuesta arbittos asistentes---> ", response)
+          if (response != null && response.length > 0) {
+            this.partidoArbitro1 = response[0]
+            this.arbitroAsistente1 = this.partidoArbitro1.arbitro
+            this.partidoArbitro2 = response[1]
+            this.arbitroAsistente2 = this.partidoArbitro2.arbitro
+          }
+
+        });
   }
 
   public listarArbitros(): void {
@@ -67,39 +101,70 @@ export class PartidoComponent implements OnInit {
   }
 
 
-  public asignarArbitro(caso: string): void {
-    let partidoArbitro: ArbitroPartido = new ArbitroPartido();
-    console.log("opcion -->", caso)
+  public asignarArbitroCentral(): void {
 
-    console.log("opcion seleccionada-->", this.arbitroCentral)
-
-
-    switch (caso) {
-      case '1':
-        partidoArbitro.paarArbitroCentral = 1;
-        partidoArbitro.arbitro.arbiId = this.arbitroCentral;
-        break;
-      case '2':
-        partidoArbitro.paarArbitroCentral = 0;
-        partidoArbitro.arbitro.arbiId = this.arbitroAsistente1;
-        break;
-      case '3':
-        partidoArbitro.paarArbitroCentral = 0;
-        partidoArbitro.arbitro.arbiId = this.arbitroAsistente1;
-        break;
-    }
-
-    if (partidoArbitro.arbitro.arbiId != 0) {
-      this.arbitroService.asignarArbitroPartido(partidoArbitro).
+    if (this.arbitroCentral.arbiId != 0) {
+      this.partidoArbitroCentral.paarArbitrocentral = 1;
+      this.partidoArbitroCentral.arbitro = this.arbitroCentral
+      this.partidoArbitroCentral.partido = this.partido
+      this.arbitroService.asignarArbitroPartido(this.partidoArbitroCentral).
         subscribe(
           response => {
             // this.router.navigate(['/listTorneo'])
-            partidoArbitro = response
-            swal.fire('Asignación', `El arbitro ${partidoArbitro.arbitro.arbiNombre} ha sido asignado al partido`, 'success')
+            swal.fire('Asignación', `El arbitro ha sido asignado al partido`, 'success')
           }
         )
     } else {
       swal.fire('Asignación', 'seleccione un arbitro', 'error')
     }
   }
+
+  public asignarArbitro1(): void {
+
+    if (this.arbitroAsistente1.arbiId != 0) {
+      this.partidoArbitro1.paarArbitrocentral = 0;
+      this.partidoArbitro1.partido = this.partido
+      this.partidoArbitro1.arbitro = this.arbitroAsistente1
+      this.arbitroService.asignarArbitroPartido(this.partidoArbitro1).
+        subscribe(
+          response => {
+            // this.router.navigate(['/listTorneo'])
+            swal.fire('Asignación', `El arbitro ha sido asignado al partido`, 'success')
+          }
+        )
+    } else {
+      swal.fire('Asignación', 'seleccione un arbitro', 'error')
+    }
+  }
+
+
+  public asignarArbitro2(): void {
+
+    if (this.arbitroAsistente2.arbiId != 0) {
+      this.partidoArbitro2.paarArbitrocentral = 0;
+      this.partidoArbitro2.partido = this.partido
+      this.partidoArbitro2.arbitro = this.arbitroAsistente2
+      this.arbitroService.asignarArbitroPartido(this.partidoArbitro2).
+        subscribe(
+          response => {
+            // this.router.navigate(['/listTorneo'])
+            swal.fire('Asignación', `El arbitro  ha sido asignado al partido`, 'success')
+          }
+        )
+    } else {
+      swal.fire('Asignación', 'seleccione un arbitro', 'error')
+    }
+  }
+
+  public actualizarPartido(): void {
+
+    this.partidoService.actualizarPartido(this.partido, this.partido.partFecha)
+      .subscribe(
+        respuesta => {
+          //this.router.navigate(['/listEquipo'])
+          swal.fire('Partido actualizado', `Partido actualizado con éxito`, 'success')
+        }
+      )
+  }
+
 }

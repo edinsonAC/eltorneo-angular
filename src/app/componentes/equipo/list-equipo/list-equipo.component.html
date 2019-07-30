@@ -1,11 +1,13 @@
 <div class="card border-primary mb-3">
-  <div class="card-header"><h3>Equipos</h3> </div>
+  <div class="card-header">
+    <h3>Equipos</h3>
+  </div>
   <div class="card-body text-primary">
     <div class="row">
       <div class="col-md-6">
         <h5 class="card-title">Listado de equipos</h5>
       </div>
-      <div class="col-md-6 text-align-end">
+      <div class="col-md-6 text-align-end" *ngIf="authService.getTipo()=='8'">
         <button type="button" class="btn btn-primary" [routerLink]="['/equipo']"><b>Crear equipo</b></button>
 
       </div>

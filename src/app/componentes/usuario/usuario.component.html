@@ -2,12 +2,12 @@
   <div class="card-header">Usuarios</div>
   <div class="card-body text-primary">
     <h5 class="card-title">Listado de usuarios</h5>
-    <table class="table table-bordered table-striped" datatable="" >
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped" >
       <thead>
         <tr>
-          <th>id</th>
-          <th>usuario</th>
-          <th>correo</th>
+          <th>Id</th>
+          <th>Correo</th>
+          <th>Usuario</th>
         </tr>
       </thead>
       <tbody>

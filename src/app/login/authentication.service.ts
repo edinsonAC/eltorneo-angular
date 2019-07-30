@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Usuario } from '../componentes/usuario/usuario';
+import { User } from '../componentes/usuario/usuario';
 
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-  prueba: Usuario;
+  prueba: User;
   private urlLogin: string = 'http://localhost:8080/api/loguear';
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
@@ -22,7 +22,7 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  login(us: Usuario) {
+  login(us: User) {
     this.prueba = us;
 
     return this.http.post<any>(this.urlLogin, this.prueba)

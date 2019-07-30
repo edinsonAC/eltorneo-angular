@@ -1,8 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">{{title}}</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+    <button class="btn btn-primary tituloTorneo" type="button">
+        <span class=""><b>{{title}}</b></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -13,15 +11,19 @@
             <li class="nav-item" *ngIf="authService.getTipo() == '1'" routerLinkActive="active">
                 <a class="nav-link" routerLink="/usuarios">Usuarios </a>
             </li>
-            <li class="nav-item" *ngIf="authService.getTipo() == '1'" routerLinkActive="active">
+            <li class="nav-item" *ngIf="authService.getTipo() == '1' || authService.getTipo() == '2' "
+                routerLinkActive="active">
                 <a class="nav-link" routerLink="/listEquipo">Equipo </a>
             </li>
             <li class="nav-item" *ngIf="authService.getTipo() == '1'" routerLinkActive="active">
                 <a class="nav-link" routerLink="/listArbitro">Arbitros </a>
             </li>
+            <li class="nav-item" *ngIf="authService.getTipo() == '3'" routerLinkActive="active">
+                <a class="nav-link" routerLink="/listPartido">Partidos asignados </a>
+            </li>
         </ul>
-        <span  class="cerrar-sesion flaticon-login"  *ngIf="authService.isLoggedIn()" (click)="logout()" >
-          
+        <span class="cerrar-sesion flaticon-login" *ngIf="authService.isLoggedIn()" (click)="logout()">
+
         </span>
 
     </div>

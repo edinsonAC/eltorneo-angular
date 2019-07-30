@@ -13,9 +13,9 @@
     <table class="table table-bordered table-striped" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
       <thead>
         <tr>
-          <th>nombre</th>
-          <th>fecha inicial</th>
-          <th>editar</th>
+          <th>Nombre</th>
+          <th>Fecha inicial</th>
+          <th>Acción</th>
         </tr>
       </thead>
       <tbody>
@@ -23,7 +23,7 @@
           <td>{{torneo.tornNombre}}</td>
           <td>{{torneo.tornFechainicial}}</td>
           <td><button type="button" class="btn btn-primary" name="button"
-              [routerLink]="['/torneo', torneo.tornId]">editar</button></td>
+              [routerLink]="['/torneo', torneo.tornId]">Gestion</button></td>
         </tr>
       </tbody>
     </table>

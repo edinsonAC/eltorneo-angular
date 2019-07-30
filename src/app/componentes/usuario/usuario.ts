@@ -1,4 +1,6 @@
-export class Usuario {
+import { TipoUsuario } from '../jugador/tipoUsuario';
+
+export class User {
     usuaId: string;
     password: string;
     usuaCorreo: string;
@@ -6,5 +8,5 @@ export class Usuario {
     usuaFecharegistro: string;
     usuaImgperfil: string;
     usuaUsuario: string;
-
+    tipoUsuario: TipoUsuario
 }

@@ -5,7 +5,8 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { Observable } from 'rxjs';
 import { Arbitro } from './arbitro';
 import { map } from 'rxjs/operators';
-import { ArbitroPartido } from './arbitroPartido';
+import { PartidoArbitro } from './arbitroPartido';
+import { Partido } from '../partido/partido';
 
 const API_URL = environment.apiUrl;
 @Injectable({
@@ -42,8 +43,16 @@ export class ArbitroService {
     return this.http.put<Arbitro>(`${this.urlGetArbitro}/${arbitro.arbiId}`, arbitro, { headers: this.httpHeaders })
   }
 
-  asignarArbitroPartido(encuentro: ArbitroPartido): Observable<ArbitroPartido> {
-    return this.http.post<ArbitroPartido>(API_URL + "/arbitro/asignarArbitroPartido", encuentro, { headers: this.httpHeaders })
+  asignarArbitroPartido(encuentro: PartidoArbitro): Observable<PartidoArbitro> {
+    return this.http.post<PartidoArbitro>(API_URL + "/partido/asignarArbitroPartido", encuentro, { headers: this.httpHeaders })
+  }
+
+
+  listarPartidosAsignados(): Observable<Partido[]> {
+    return this.http.get(API_URL + '/partido/listarPartidosAsignados').pipe(
+      //  return this.http.get(`${API_URL + '/arbitro/listarArbitros'}/${this.auth.getTipo()}`).pipe(
+      map(response => response as Partido[])
+    );
   }
 
 }

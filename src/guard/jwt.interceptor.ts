@@ -18,7 +18,6 @@ export class JwtInterceptor implements HttpInterceptor {
                 Authorization: `Bearer ${this.auth.getToken()}`
             }
         });
-        console.log("el interceptor ", interceptedRequest)
         return next.handle(interceptedRequest).pipe(catchError(x => this.handleErrors(x)));
 
     }
@@ -26,7 +25,6 @@ export class JwtInterceptor implements HttpInterceptor {
     private handleErrors(err: HttpErrorResponse): Observable<any> {
         console.log("el handler ", err)
         if (err.status === 401) {
-            console.log("entra aal if interceptor", err.message)
             this.auth.redirectToUrl = this.router.url;
             swal.fire('Error de autenticación', '', 'error')
             this.router.navigate(['/login']);

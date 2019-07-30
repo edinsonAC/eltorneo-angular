@@ -10,7 +10,7 @@ import { AppComponent } from 'src/app/app.component';
 })
 
 export class HeaderComponent {
-    title: string = 'app el torneo'
+    title: string = 'ElTorneo'
     sesionActiva: boolean = false;
     private tipoUsuario: string;
 

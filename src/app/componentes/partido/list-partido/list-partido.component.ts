@@ -3,6 +3,8 @@ import { Partido } from '../partido';
 import { PartidoService } from '../partido.service';
 import { Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { ArbitroService } from '../../arbitro/arbitro.service';
 
 @Component({
   selector: 'app-list-partido',
@@ -17,7 +19,9 @@ export class ListPartidoComponent implements OnInit {
 
   constructor(
     private partidoService: PartidoService,
-    private activateRoute: ActivatedRoute
+    private arbitroService: ArbitroService,
+    private activateRoute: ActivatedRoute,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -44,6 +48,28 @@ export class ListPartidoComponent implements OnInit {
       },
     };
 
+
+    if (this.authService.getTipo() == '1') {
+      this.listarPartidosPorTorneo()
+    } else if (this.authService.getTipo() == '3') {
+      this.listarPartidosAsignados()
+    }
+
+
+  }
+
+
+
+  listarPartidosAsignados(): void {
+    this.arbitroService.listarPartidosAsignados().
+      subscribe(
+        response => {
+          this.partidos = response
+          this.dtTrigger.next();
+        });
+  }
+
+  listarPartidosPorTorneo(): void {
     this.activateRoute.params.subscribe(params => {
       this.idTorneo = params['id']
       if (this.idTorneo) {

@@ -1,5 +1,5 @@
 <div class="row back">
-  <button type="button" class="btn btn-light"   [routerLink]="['/listEquipo']">Volver</button>
+  <button type="button" class="btn btn-light" [routerLink]="['/listEquipo']">Volver</button>
 </div>
 <div class="card border-primary mb-3">
   <div class="card-header">Jugadores</div>
@@ -9,7 +9,8 @@
         <h5 class="card-title">Listado de jugadores</h5>
       </div>
       <div class="col-md-6 text-align-end">
-        <button type="button" class="btn btn-primary" [routerLink]="['/jugador']"><b>Crear jugador</b></button>
+        <button type="button" class="btn btn-primary" [routerLink]="['/jugador',0,idEquipo]"><b>Crear
+            jugador</b></button>
 
       </div>
     </div>

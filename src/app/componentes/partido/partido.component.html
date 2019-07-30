@@ -16,41 +16,53 @@
           <label for="" class="col-form-label">Equipo visitante</label>
           <input type="text" name="nombre" class="form-control" disabled [(ngModel)]="equipo2.equiNombre">
         </div>
-
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="" class="col-form-label">Fecha de partido</label>
+          <input type="date" name="nombre" class="form-control" [(ngModel)]="partido.partFecha">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <button type="button" class="btn btn-primary" (click)="actualizarPartido()">Cambiar fecha</button>
+        </div>
       </div>
     </div>
     <div class="row accomont form-group">
       <div class="col-md-6">
         <label for="arbitro" class="form-label">Arbitros</label>
-        <select name="arbitro" class="form-control" [(ngModel)]="arbitroCentral" >
+        <select  class="form-control" [(ngModel)]="arbitroCentral.arbiId" >
           <option value="0">Seleccione un arbitro</option>
           <option *ngFor="let arbitro of arbitros" value="{{arbitro.arbiId}}" >{{arbitro.arbiNombre}} {{arbitro.arbiApellido}}</option>
         </select>
       </div>
       <div class="col-md-6">
-        <button type="button" class="btn btn-success" value="1" (click)="asignarArbitro(this.value)" >Asignar Central</button>
+        <button type="button" class="btn btn-success" value="1" (click)="asignarArbitroCentral()">Asignar Central</button>
       </div>
     </div>
     <div class="row accomont form-group">
       <div class="col-md-6">
-        <select name="arbitro" class="form-control" [(ngModel)]="arbitroAsistente1" >
+        <select class="form-control" [(ngModel)]="arbitroAsistente1.arbiId" >
           <option value="0">Seleccione un arbitro</option>
-          <option *ngFor="let arbitro of arbitros" value="{{arbitro.arbiId}}" >{{arbitro.arbiNombre}} {{arbitro.arbiApellido}}</option>
+          <option *ngFor="let arbitro of arbitros" value="{{arbitro.arbiId}}"    >{{arbitro.arbiNombre}} {{arbitro.arbiApellido}}</option>
         </select>
       </div>
       <div class="col-md-6">
-        <button type="button" class="btn btn-success" value="2"  (click)="asignarArbitro(this.value)">Asignar asistente</button>
+        <button type="button" class="btn btn-success" value="2"  (click)="asignarArbitro1()">Asignar asistente</button>
       </div>
     </div>
     <div class="row accomont form-group" >
       <div class="col-md-6">
-        <select name="arbitro" id="arbitro" class="form-control" [(ngModel)]="arbitroAsistente2" >
+        <select class="form-control" [(ngModel)]="arbitroAsistente2.arbiId" >
           <option value="0">Seleccione un arbitro</option>
-          <option *ngFor="let arbitro of arbitros" value="{{arbitro.arbiId}}" >{{arbitro.arbiNombre}} {{arbitro.arbiApellido}}</option>
+          <option *ngFor="let arbitro of arbitros"  value="{{arbitro.arbiId}}" >{{arbitro.arbiNombre}} {{arbitro.arbiApellido}}</option>
         </select>
       </div>
       <div class="col-md-6">
-        <button type="button" class="btn btn-success" value="3" (click)="asignarArbitro(this.value)">Asignar asistente</button>
+        <button type="button" class="btn btn-success" value="3" (click)="asignarArbitro2()">Asignar asistente</button>
       </div>
     </div>
   </div>

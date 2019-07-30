@@ -1,5 +1,5 @@
 <div class="row back">
-  <button type="button" class="btn btn-light" [routerLink]="['/listJugadores', jugador.equipo.equiId]">Volver</button>
+  <button type="button" class="btn btn-light" [routerLink]="['/listJugadores', idEquipo.equiId]">Volver</button>
 </div>
 <div class="card">
   <div class="card-header">Registrar jugador</div>
@@ -8,7 +8,8 @@
       <div class="form-group row">
         <label for="" class="col-form-label col-2">Nombres</label>
         <div class="col-sm-6 ">
-          <input type="text" name="nombre" class="form-control" [(ngModel)]="jugador.jugaNombre" autocomplete="off" required #nombre="ngModel">
+          <input type="text" name="nombre" class="form-control" [(ngModel)]="jugador.jugaNombre" autocomplete="off"
+            maxlength="30" required #nombre="ngModel">
           <span *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
             <label class="label is-invalid" *ngIf="nombre.errors.required">
               Nombres es requerido
@@ -19,7 +20,8 @@
       <div class="form-group row">
         <label for="" class="col-form-label col-2">Apellidos</label>
         <div class="col-sm-6">
-          <input type="text" name="apellido" class="form-control" [(ngModel)]="jugador.jugaApellido" autocomplete="off" required #apellido="ngModel">
+          <input type="text" name="apellido" class="form-control" [(ngModel)]="jugador.jugaApellido" autocomplete="off"
+            maxlength="30" required #apellido="ngModel">
           <span *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
             <label class="label is-invalid" *ngIf="apellido.errors.required">
               apellidos es requerido
@@ -30,7 +32,8 @@
       <div class="form-group row">
         <label for="" class="col-form-label col-2">Documento</label>
         <div class="col-sm-6">
-          <input type="text" name="fecha" class="form-control" [(ngModel)]="jugador.jugaDocumento" autocomplete="off" required #documento="ngModel">
+          <input type="text" name="fecha" class="form-control" [(ngModel)]="jugador.jugaDocumento" autocomplete="off"
+            maxlength="15" required #documento="ngModel">
           <span *ngIf="documento.invalid && (documento.dirty || documento.touched)">
             <label class="label is-invalid" *ngIf="documento.errors.required">
               documento es requerido
@@ -41,7 +44,8 @@
       <div class="form-group row">
         <label for="" class="col-form-label col-2">Direccion</label>
         <div class="col-sm-6">
-          <input type="text" name="direccion" class="form-control" [(ngModel)]="jugador.jugaDireccion" autocomplete="off" required #direccion="ngModel">
+          <input type="text" name="direccion" class="form-control" [(ngModel)]="jugador.jugaDireccion"
+            autocomplete="off" maxlength="30" required #direccion="ngModel">
           <span *ngIf="direccion.invalid && (direccion.dirty || direccion.touched)">
             <label class="label is-invalid" *ngIf="direccion.errors.required">
               dirección es requerida
@@ -52,7 +56,8 @@
       <div class="form-group row">
         <label for="" class="col-form-label col-2">Celular</label>
         <div class="col-sm-6">
-          <input type="text" name="celular" class="form-control" [(ngModel)]="jugador.jugaCelular" autocomplete="off" required #celular="ngModel">
+          <input type="number" name="celular" class="form-control" [(ngModel)]="jugador.jugaCelular" autocomplete="off"
+            maxlength="10" required #celular="ngModel">
           <span *ngIf="celular.invalid && (celular.dirty || celular.touched)">
             <label class="label is-invalid" *ngIf="celular.errors.required">
               celular es requerido
@@ -63,10 +68,27 @@
       <div class="form-group row">
         <label for="" class="col-form-label col-2">Dorsal</label>
         <div class="col-sm-6">
-          <input type="number" name="dorsal" class="form-control" [(ngModel)]="jugador.jugaDorsal" autocomplete="off" required #dorsal="ngModel">
+          <input type="number" name="dorsal" class="form-control" [(ngModel)]="jugador.jugaDorsal" autocomplete="off"
+            maxlength="3" required #dorsal="ngModel">
           <span *ngIf="dorsal.invalid && (dorsal.dirty || dorsal.touched)">
             <label class="label is-invalid" *ngIf="dorsal.errors.required">
               dorsal es requerida
+            </label>
+          </span>
+        </div>
+      </div>
+      <div class="row form-group">
+        <label for="arbitro" class="col-form-label col-2">Posicion jugador</label>
+
+        <div class="col-md-6">
+          <select class="form-control" name="posicion" [(ngModel)]="posicionJuga.pojuId" required #posicion="ngModel">
+            <option value="0">Seleccione una posicion</option>
+            <option *ngFor="let posicion of posiciones" value="{{posicion.pojuId}}">{{posicion.pojuNombre}}
+            </option>
+          </select>
+          <span *ngIf="posicion.invalid && (posicion.dirty || posicion.touched)">
+            <label class="label is-invalid" *ngIf="posicion.errors.required">
+              posicion es requerida
             </label>
           </span>
         </div>
@@ -77,7 +99,7 @@
             *ngIf="!jugador.jugaId else elseBlock">Registrar</button>
           <ng-template #elseBlock>
             <button type="button" class="btn btn-primary" (click)='actualizarJugador()'>Actualizar</button>
-            </ng-template>
+          </ng-template>
 
         </div>
       </div>

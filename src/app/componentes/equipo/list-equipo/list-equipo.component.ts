@@ -3,6 +3,7 @@ import { Equipo } from '../equipo';
 import { EquipoService } from '../equipo.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-list-equipo',
@@ -17,7 +18,8 @@ export class ListEquipoComponent implements OnInit {
 
 
   constructor(
-    private equipoService: EquipoService
+    private equipoService: EquipoService,
+    private authService:AuthService,
   ) { }
 
   ngOnInit() {

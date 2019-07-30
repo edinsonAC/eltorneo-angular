@@ -1,9 +1,9 @@
 import { Partido } from '../partido/partido';
 import { Arbitro } from './arbitro';
 
-export class ArbitroPartido {
+export class PartidoArbitro {
     paarId: number;
-    paarArbitroCentral: number;
+    paarArbitrocentral: number;
     partido: Partido;
     arbitro: Arbitro;
 }

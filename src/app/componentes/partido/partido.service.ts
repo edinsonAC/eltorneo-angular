@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Partido } from './partido';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
+import { PartidoArbitro } from '../arbitro/arbitroPartido';
 
 const API_URL = environment.apiUrl;
 
@@ -37,9 +38,26 @@ export class PartidoService {
     return this.http.post<Partido>(API_URL + "/partido/crearPartido", torneo, { headers: this.httpHeaders })
   }
 
-  actualizarPartido(partido: Partido) {
-    return this.http.put<Partido>(`${this.urlGetPartido}/${partido.partId}`, partido, { headers: this.httpHeaders })
+  actualizarPartido(partido: Partido, fecha:string) {
+    return this.http.put<Partido>(`${this.urlGetPartido}/${partido.partId}/${fecha}`, partido, { headers: this.httpHeaders })
   }
 
+
+  buscarArbitroCentralPorPartido(id): Observable<PartidoArbitro> {
+    return this.http.get(`${API_URL + "/partido/buscarArbitroAsignado"}/${id}`).pipe(
+      map(response => response as PartidoArbitro)
+    );
+  }
+
+  buscarArbitroAsistentesPorPartido(id): Observable<PartidoArbitro[]> {
+    return this.http.get(`${API_URL + "/partido/buscarArbitroAsistente"}/${id}`).pipe(
+      map(response => response as PartidoArbitro[])
+    );
+  }
+
+
+  actualizarArbitroPartido(arbitro: PartidoArbitro) {
+    return this.http.put<PartidoArbitro>(`${API_URL + "/partido/buscarArbitroAsignado"}/${arbitro.paarId}`, arbitro, { headers: this.httpHeaders })
+  }
 
 }

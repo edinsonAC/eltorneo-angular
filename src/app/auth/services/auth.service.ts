@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { TokenService } from './token.service';
 import { HttpResponse } from '@angular/common/http';
-import { Usuario } from 'src/app/componentes/usuario/usuario';
+import { User } from 'src/app/componentes/usuario/usuario';
 import { environment } from 'src/environments/environment';
 import { AppComponent } from 'src/app/app.component';
 import * as jwt_decode from "jwt-decode";
@@ -23,14 +23,23 @@ export class AuthService {
     private appComp: AppComponent
   ) { }
 
-  public login(credentials: Usuario): void {
+  public login(credentials: User): void {
     this.tokenService.getResponseHeaders(credentials)
       .subscribe((res: HttpResponse<any>) => {
         console.log("respuesta --< ", res);
         this.saveToken(res.headers.get('Authorization'));
         this.obtenerTipoUsuario();
-        this.router.navigate([this.redirectToUrl]);
-      }      
+
+        if (this.getTipo() == '1') {
+          this.router.navigate(['/listTorneo']);
+        }
+        else if (this.getTipo() == '3') {
+          this.router.navigate(['/listPartido']);
+        } else {
+          this.router.navigate(['/listEquipo']);
+
+        }
+      }
       )
   }
 
@@ -45,8 +54,12 @@ export class AuthService {
 
   public logout(): void {
     localStorage.removeItem(AuthService.TOKEN_STORAGE_KEY);
-    // this.router.navigate(['/login']);
-    location.reload();
+    this.router.navigate(['/login']);
+
+    setTimeout(function () {
+      location.reload();
+    }, 500)
+    //   
   }
 
   public isLoggedIn(): boolean {

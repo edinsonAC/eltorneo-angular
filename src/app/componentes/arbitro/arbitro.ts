@@ -1,4 +1,4 @@
-import { Usuario } from '../usuario/usuario';
+import { User } from '../usuario/usuario';
 
 export class Arbitro {
     arbiId: number;
@@ -11,5 +11,5 @@ export class Arbitro {
     arbiNombre: string;
     arbiTelefono: string;
     arbitrocol: string;
-    usuario: Usuario;
+    usuario: User;
 }

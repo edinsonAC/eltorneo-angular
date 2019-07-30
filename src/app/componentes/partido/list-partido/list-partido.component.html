@@ -1,5 +1,5 @@
-<div class="row back">
-  <button type="button" class="btn btn-light"   [routerLink]="['/listTorneo']">Volver</button>
+<div class="row back" *ngIf="authService.getTipo() != '3'">
+  <button type="button" class="btn btn-light" [routerLink]="['/listTorneo']">Volver</button>
 </div>
 <div class="card border-primary mb-3">
   <div class="card-header">Partidos</div>
@@ -9,20 +9,20 @@
         <h5 class="card-title">Listado de partido</h5>
       </div>
     </div>
-    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped" >
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped">
       <thead>
         <tr>
           <th>partido</th>
           <th>Jornada</th>
-          <th>Gestion</th>
+          <th *ngIf="authService.getTipo() != '3' ">Gestion</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let partido of partidos">
           <td>{{partido.equipo1.equiNombre}} vs {{partido.equipo2.equiNombre}}</td>
           <td>{{partido.partJornada}}</td>
-          <td><button type="button" class="btn btn-primary" name="button"
-            [routerLink]="['/partido', partido.partId]">editar</button></td>
+          <td *ngIf="authService.getTipo() != '3'"><button type="button" class="btn btn-primary" name="button"
+              [routerLink]="['/partido', partido.partId]">editar</button></td>
         </tr>
       </tbody>
     </table>

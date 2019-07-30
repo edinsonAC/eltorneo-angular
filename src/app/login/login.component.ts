@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Usuario } from '../componentes/usuario/usuario';
+import { User } from '../componentes/usuario/usuario';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsuarioService } from '../componentes/usuario/usuario.service';
 import { AuthService } from '../auth/services/auth.service';
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  usuario: Usuario = new Usuario();
+  usuario: User = new User();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
   ) {  }
 
   ngOnInit() {
+    this.authenticationService.getTipo()
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]

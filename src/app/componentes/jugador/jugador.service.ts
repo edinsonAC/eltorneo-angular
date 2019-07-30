@@ -5,8 +5,9 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { map } from 'rxjs/operators';
+import { PosicionJugador } from './posicionJugador';
 
-const API_URL_JUGADOR = environment.apiUrl+'/jugador';
+const API_URL_JUGADOR = environment.apiUrl + '/jugador';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,12 @@ export class JugadorService {
 
   actualizarJugador(jugador: Jugador) {
     return this.http.put<Jugador>(`${this.urlGetTorneo}/${jugador.jugaId}`, jugador, { headers: this.httpHeaders })
+  }
+
+  listarPosicion(): Observable<PosicionJugador[]> {
+    return this.http.get(`${API_URL_JUGADOR + '/listarPosicion'}`).pipe(
+      map(response => response as PosicionJugador[])
+    );
   }
 
 }

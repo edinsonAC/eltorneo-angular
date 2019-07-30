@@ -8,7 +8,7 @@
       <div class="row form-group">
         <label for="" class="col-form-label col-2">Nombre</label>
         <div class="col-sm-6 ">
-          <input type="text" name="nombre" class="form-control " [(ngModel)]="torneo.tornNombre" required #nombre="ngModel">
+          <input type="text" name="nombre" class="form-control " [(ngModel)]="torneo.tornNombre" maxlength="20" required #nombre="ngModel">
           <span *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
             <label class="label is-invalid" *ngIf="nombre.errors.required">
               Nombre es requerido
@@ -19,7 +19,7 @@
       <div class="row form-group">
         <label for="" class="col-form-label col-2">Fecha de inicio</label>
         <div class="col-sm-6">
-          <input type="date" name="fecha" class="form-control" [(ngModel)]="torneo.tornFechainicial" required #fecha="ngModel">
+          <input type="date" name="fecha" class="form-control" [(ngModel)]="torneo.tornFechainicial" maxlength="20" required #fecha="ngModel">
           <span *ngIf="fecha.invalid && (fecha.dirty || fecha.touched)">
             <label *ngIf="fecha.errors.required" class="label is-invalid">
               Fecha es requerida
@@ -41,7 +41,7 @@
           <button type="button" *ngIf="torneo.tornSorteo != '1' " class="btn btn-success"
             (click)='realizarSorteo()'>Iniciar
             sorteo</button>
-          <button type="button" class="btn btn-success" name="button" [routerLink]="['/listPartido', torneo.tornId]">ver
+          <button type="button" *ngIf="torneo.tornSorteo == '1' " class="btn btn-success" name="button" [routerLink]="['/listPartido', torneo.tornId]">ver
             partidos</button>
         </div>
       </ng-template>
